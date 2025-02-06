@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:webflow="http://www.springframework.org/schema/webflow-config"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+           http://www.springframework.org/schema/webflow-config 
+           http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<!-- parent application context definition for the application -->
+	<!-- make the dataSource bean available to all servlets -->
+	
+	<context:annotation-config/>
+	
+	<context:component-scan base-package="au.gov.nsw.lpi.valnet"/>
+
+	<bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource"
+		destroy-method="close">
+		<property name="URL" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	
+	<bean id="appConfig" class="au.gov.nsw.lpi.valnet.domain.AppConfig">
+		<property name="appUsername" value="${app.username}"/>
+		<property name="appPassword" value="${app.password}"/>
+	</bean>
+	
+ 	<context:property-placeholder location="classpath:${pom.jdbc.properties}" />
+    
+ 	<!-- valnetSNSW-dev.properties    valnetSNSW.properties   ${pom.jdbc.properties} -->
+		
+</beans>
