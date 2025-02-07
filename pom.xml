@@ -89,7 +89,7 @@
 			</properties>
 		</profile>
 	</profiles>
-    
+
 	<distributionManagement>
 		<repository>
 			<id>internal</id>
@@ -101,7 +101,7 @@
 			<url>dav:http://bds-srv-devadmin.lands.nsw:8080/archiva/repository/snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
-    
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>3.0.5.RELEASE</spring.version>
