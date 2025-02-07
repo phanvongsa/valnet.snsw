@@ -5,10 +5,10 @@
  
     <modelVersion>4.0.0</modelVersion>
     <groupId>au.gov.nsw.lpi</groupId>
-    <artifactId>valnetSNSW</artifactId>
+    <artifactId>snsw</artifactId>
     <packaging>war</packaging>
     <version>1.0.1-SNAPSHOT</version>
-    <name>valnetSNSW</name>
+    <name>snsw</name>
     <url>http://maven.apache.org</url>
     
 	<scm>
@@ -18,6 +18,20 @@
 	</scm>
     
 	<profiles>
+		<profile>
+			<id>local</id>
+			<activation>
+				<property>
+					<name>env</name>
+					<value>local</value>
+				</property>
+			</activation>
+			<properties>
+				<pom.jdbc.properties>valnetSNSW-local.properties</pom.jdbc.properties>
+				<pom.log4j.properties>CONSOLE</pom.log4j.properties>
+				<rp.build.env>local</rp.build.env>
+			</properties>
+		</profile>
 		<profile>
 			<id>dev</id>
 			<activation>
@@ -29,6 +43,7 @@
 			<properties>
 				<pom.jdbc.properties>valnetSNSW-dev.properties</pom.jdbc.properties>
 				<pom.log4j.properties>CONSOLE</pom.log4j.properties>
+				<rp.build.env>dev</rp.build.env>
 			</properties>
 		</profile>
 		<profile>
@@ -42,6 +57,7 @@
 			<properties>
 				<pom.jdbc.properties>valnetSNSW-uat.properties</pom.jdbc.properties>
 				<pom.log4j.properties>DailyRoller</pom.log4j.properties>
+				<rp.build.env>qa</rp.build.env>
 			</properties>
 		</profile>
 		<profile>
@@ -55,6 +71,7 @@
 			<properties>
 				<pom.jdbc.properties>valnetSNSW.properties</pom.jdbc.properties>
 				<pom.log4j.properties>DailyRoller</pom.log4j.properties>
+				<rp.build.env>uat</rp.build.env>
 			</properties>
 		</profile>
 		<profile>
@@ -68,6 +85,7 @@
 			<properties>
 				<pom.jdbc.properties>valnetSNSW.properties</pom.jdbc.properties>
 				<pom.log4j.properties>DailyRoller</pom.log4j.properties>
+				<rp.build.env>prod</rp.build.env>
 			</properties>
 		</profile>
 	</profiles>
@@ -265,7 +283,7 @@
 				</configuration>
 			</plugin>                          
          </plugins>
-        <finalName>valnetSNSW</finalName>
+        <finalName>valnetSNSW-${rp.build.env}</finalName>
     </build>
  
 </project>
